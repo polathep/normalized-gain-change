@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Normalized Gain & Normalized Change</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Main navigation">
+        <div class="brand">Learning Change Lab</div>
+        <div class="nav-links">
+          <a href="#calculator">ลองคำนวณ</a>
+          <a href="#concepts">แนวคิด</a>
+          <a href="#literature">Literature review</a>
+          <a href="#examples">ตัวอย่าง</a>
+        </div>
+      </nav>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Pretest / Posttest Analytics</p>
+          <h1>Normalized Gain และ Normalized Change</h1>
+          <p>
+            เว็บอินเทอร์แอคทีฟสำหรับทำความเข้าใจการวัดผลการเรียนรู้จากคะแนนก่อนเรียนและหลังเรียน
+            พร้อมสูตร ตัวอย่าง และเครื่องมือคำนวณที่เห็นผลทันที
+          </p>
+          <div class="creator-credit">
+            <span>สร้างโดย Polathep Vichitkunakorn (Tee)</span>
+            <span>9 May 2026</span>
+          </div>
+          <a class="primary-action" href="#calculator">เริ่มทดลอง</a>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="score-line">
+            <span>Pre</span>
+            <strong id="heroPre">40</strong>
+          </div>
+          <div class="growth-arc">
+            <div class="arc-fill"></div>
+          </div>
+          <div class="score-line">
+            <span>Post</span>
+            <strong id="heroPost">70</strong>
+          </div>
+          <div class="hero-result">
+            <span>g</span>
+            <strong id="heroGain">0.50</strong>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section intro" id="concepts">
+        <div class="section-heading">
+          <p class="eyebrow">Why It Matters</p>
+          <h2>ทำไมไม่ใช้แค่คะแนนเพิ่มขึ้นดิบ ๆ</h2>
+        </div>
+        <div class="concept-grid">
+          <article>
+            <h3>Raw Gain</h3>
+            <p>ดูว่าคะแนนเพิ่มหรือลดเท่าไรโดยตรง เช่น 40 เป็น 70 คือเพิ่ม 30 คะแนน</p>
+            <code>post - pre</code>
+          </article>
+          <article>
+            <h3>Normalized Gain</h3>
+            <p>เทียบคะแนนที่เพิ่มขึ้นกับคะแนนที่ยังเพิ่มได้ เหมาะเมื่อคะแนนหลังเรียนสูงกว่าก่อนเรียน</p>
+            <code>(post - pre) / (100 - pre)</code>
+          </article>
+          <article>
+            <h3>Normalized Change</h3>
+            <p>วัดได้ทั้งการเพิ่มขึ้นและลดลงอย่างสมดุลกว่า โดยกรณีคะแนนลดจะเทียบกับคะแนนก่อนเรียน</p>
+            <code>gain / possible change</code>
+          </article>
+        </div>
+      </section>
+
+      <section class="section literature" id="literature">
+        <div class="section-heading">
+          <p class="eyebrow">Literature Review</p>
+          <h2>จากคะแนนก่อน-หลังเรียน สู่การตีความ learning gain</h2>
+        </div>
+
+        <div class="literature-layout">
+          <article class="review-block lead-review">
+            <h3>1. ปัญหาของการใช้ raw gain เพียงอย่างเดียว</h3>
+            <p>
+              การวัดผลแบบ pretest-posttest มักเริ่มจากการดูผลต่างคะแนนดิบ เช่น
+              <strong>posttest - pretest</strong> แต่ผลต่างคะแนนดิบมีข้อจำกัดสำคัญ เพราะผู้เรียนที่มีคะแนนก่อนเรียนสูง
+              มีพื้นที่ให้พัฒนาได้น้อยกว่าผู้เรียนที่มีคะแนนก่อนเรียนต่ำ ปัญหานี้เกี่ยวข้องกับข้อถกเถียงคลาสสิกเรื่อง
+              การวัด “change” ในงานวัดผลและจิตวิทยาการศึกษา ซึ่ง Lord และ Cronbach & Furby เคยชี้ว่าการตีความ
+              change score ต้องระวังเรื่องคะแนนตั้งต้น ความคลาดเคลื่อน และ regression to the mean
+            </p>
+          </article>
+
+          <article class="review-block">
+            <h3>2. Hake และการทำให้ normalized gain เป็นมาตรฐาน</h3>
+            <p>
+              Hake (1998) ทำให้นิยมใช้ <strong>normalized gain</strong> อย่างแพร่หลายใน physics education research
+              จากการศึกษาข้อมูลนักเรียนจำนวนมากในวิชาฟิสิกส์เบื้องต้น โดยเปรียบเทียบการสอนแบบดั้งเดิมกับ
+              interactive engagement ค่า normalized gain แสดงว่านักเรียนได้คะแนนเพิ่มขึ้นเป็นสัดส่วนเท่าใดของคะแนน
+              ที่ยังสามารถเพิ่มได้ จึงช่วยเปรียบเทียบชั้นเรียนที่มีคะแนนก่อนเรียนต่างกันได้ดีกว่า raw gain
+            </p>
+          </article>
+
+          <article class="review-block">
+            <h3>3. Bao และปัญหาการเฉลี่ยค่า gain</h3>
+            <p>
+              Bao (2006) อธิบายว่าการคำนวณ normalized gain มีได้หลายแบบ เช่น คำนวณจากค่าเฉลี่ยของทั้งชั้นเรียน
+              หรือคำนวณรายบุคคลก่อนแล้วจึงเฉลี่ย ผลลัพธ์จากสองวิธีนี้อาจไม่เหมือนกัน โดยเฉพาะเมื่อคะแนนของผู้เรียน
+              กระจายตัวมาก ดังนั้นงานวิจัยควรระบุให้ชัดว่าใช้ <strong>class average normalized gain</strong>
+              หรือ <strong>average of individual normalized gains</strong>
+            </p>
+          </article>
+
+          <article class="review-block">
+            <h3>4. Marx & Cummings และ normalized change</h3>
+            <p>
+              Marx และ Cummings (2007) เสนอ <strong>normalized change</strong> เพื่อจัดการกรณีที่คะแนนลดลงหลังเรียน
+              ซึ่ง normalized gain แบบเดิมอาจให้ค่าติดลบที่ตีความยาก แนวคิดของ normalized change คือ ถ้าคะแนนเพิ่ม
+              ให้หารด้วยคะแนนที่ยังเพิ่มได้ แต่ถ้าคะแนนลด ให้หารด้วยคะแนนก่อนเรียน จึงให้ช่วงการตีความที่สมดุลกว่า
+              ระหว่าง learning gain และ learning loss
+            </p>
+          </article>
+
+          <article class="review-block">
+            <h3>5. ข้อถกเถียงร่วมสมัย</h3>
+            <p>
+              งานภายหลังเสนอให้ใช้ normalized gain อย่างระมัดระวัง โดยเฉพาะเมื่อต้องเปรียบเทียบกลุ่มผู้เรียนที่มีพื้นฐาน
+              ต่างกันมาก Nissen et al. (2018) เปรียบเทียบ normalized gain กับ Cohen's d และพบว่าตัวชี้วัดต่างกันอาจนำไปสู่
+              ข้อสรุปต่างกันได้ ในทางปฏิบัติ นักวิจัยจึงมักรายงานคะแนนก่อนเรียน คะแนนหลังเรียน raw gain ค่า normalized
+              และ effect size หรือแบบจำลองสถิติอื่นร่วมกัน
+            </p>
+          </article>
+
+          <aside class="review-takeaway">
+            <h3>สรุปสำหรับการใช้งาน</h3>
+            <ul>
+              <li><strong>ใช้ normalized gain</strong> เมื่อสนใจคะแนนที่เพิ่มขึ้นและต้องการเทียบกับวรรณกรรมเดิม</li>
+              <li><strong>ใช้ normalized change</strong> เมื่อข้อมูลมีทั้งคะแนนเพิ่ม คะแนนคงที่ และคะแนนลดลง</li>
+              <li><strong>รายงานข้อมูลประกอบ</strong> เช่น mean, SD, n, raw gain และวิธีคำนวณค่า normalized</li>
+              <li><strong>ใช้สถิติเสริม</strong> เมื่อเปรียบเทียบกลุ่มหรือถามคำถามเชิง causal/equity</li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="references">
+          <h3>เอกสารอ้างอิงสำคัญ</h3>
+          <ol>
+            <li>Hake, R. R. (1998). Interactive-engagement versus traditional methods. <em>American Journal of Physics, 66</em>(1), 64-74.</li>
+            <li>Bao, L. (2006). Theoretical comparisons of average normalized gain calculations. <em>American Journal of Physics, 74</em>(10), 917-922.</li>
+            <li>Marx, J. D., & Cummings, K. (2007). Normalized change. <em>American Journal of Physics, 75</em>(1), 87-91.</li>
+            <li>Nissen, J. M., Talbot, R. M., Thompson, A. N., & Van Dusen, B. (2018). Comparison of normalized gain and Cohen's d for analyzing gains on concept inventories. <em>Physical Review Physics Education Research, 14</em>, 010115.</li>
+            <li>Cronbach, L. J., & Furby, L. (1970). How should we measure change: Or should we? <em>Psychological Bulletin, 74</em>(1), 68-80.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section calculator-section" id="calculator">
+        <div class="section-heading">
+          <p class="eyebrow">Interactive Calculator</p>
+          <h2>ลองปรับคะแนนแล้วดูผลลัพธ์</h2>
+        </div>
+
+        <div class="workspace">
+          <section class="controls" aria-label="Score controls">
+            <div class="control-row">
+              <label for="preInput">Pretest</label>
+              <div class="number-control">
+                <input id="preInput" type="number" min="0" max="100" step="1" value="40" />
+                <span>/100</span>
+              </div>
+              <input id="preRange" type="range" min="0" max="100" step="1" value="40" />
+            </div>
+
+            <div class="control-row">
+              <label for="postInput">Posttest</label>
+              <div class="number-control">
+                <input id="postInput" type="number" min="0" max="100" step="1" value="70" />
+                <span>/100</span>
+              </div>
+              <input id="postRange" type="range" min="0" max="100" step="1" value="70" />
+            </div>
+
+            <div class="preset-buttons" aria-label="Example presets">
+              <button type="button" data-pre="40" data-post="70">เพิ่มแบบกลาง</button>
+              <button type="button" data-pre="80" data-post="90">ก่อนเรียนสูง</button>
+              <button type="button" data-pre="80" data-post="60">คะแนนลด</button>
+              <button type="button" data-pre="95" data-post="98">Ceiling effect</button>
+            </div>
+          </section>
+
+          <section class="results" aria-live="polite">
+            <div class="metric primary">
+              <span>Normalized Gain (g)</span>
+              <strong id="gainValue">0.50</strong>
+              <em id="gainLabel">Medium gain</em>
+            </div>
+            <div class="metric">
+              <span>Normalized Change (c)</span>
+              <strong id="changeValue">0.50</strong>
+              <em id="changeLabel">เพิ่มขึ้น 50% ของพื้นที่ที่ยังเพิ่มได้</em>
+            </div>
+            <div class="metric">
+              <span>Raw Gain</span>
+              <strong id="rawValue">+30</strong>
+              <em id="rawLabel">คะแนนหลังเรียนสูงขึ้น</em>
+            </div>
+          </section>
+        </div>
+
+        <div class="visual-panel">
+          <div class="bar-chart" aria-label="Pretest and posttest comparison">
+            <div class="bar-item">
+              <span>Pretest</span>
+              <div class="bar-track">
+                <div class="bar pre-bar" id="preBar"></div>
+              </div>
+              <strong id="preValue">40</strong>
+            </div>
+            <div class="bar-item">
+              <span>Posttest</span>
+              <div class="bar-track">
+                <div class="bar post-bar" id="postBar"></div>
+              </div>
+              <strong id="postValue">70</strong>
+            </div>
+          </div>
+
+          <div class="formula-panel">
+            <h3>สูตรที่ใช้กับค่านี้</h3>
+            <p id="formulaText">g = (70 - 40) / (100 - 40) = 0.50</p>
+            <p id="changeFormulaText">c = (70 - 40) / (100 - 40) = 0.50</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section examples" id="examples">
+        <div class="section-heading">
+          <p class="eyebrow">Worked Examples</p>
+          <h2>ตัวอย่างเปรียบเทียบ</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>สถานการณ์</th>
+                <th>Pre</th>
+                <th>Post</th>
+                <th>Raw gain</th>
+                <th>g</th>
+                <th>c</th>
+                <th>อ่านผลอย่างไร</th>
+              </tr>
+            </thead>
+            <tbody id="exampleRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section notes">
+        <div class="section-heading">
+          <p class="eyebrow">Research Notes</p>
+          <h2>ข้อควรระวังในการรายงานผล</h2>
+        </div>
+        <div class="note-grid">
+          <p>ควรรายงานคะแนนก่อนเรียน หลังเรียน ค่าเฉลี่ย ส่วนเบี่ยงเบนมาตรฐาน และจำนวนผู้เรียนร่วมด้วยเสมอ</p>
+          <p>ถ้ามีผู้เรียนคะแนนลดลงหลายคน normalized change มักตีความสมดุลกว่า normalized gain</p>
+          <p>ถ้าต้องเปรียบเทียบกลุ่ม ควรใช้สถิติเสริม เช่น effect size, ANCOVA หรือ regression model</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Created by Polathep Vichitkunakorn (Tee) · 9 May 2026 · Literature review presentation:
+        normalized gain and normalized change.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
