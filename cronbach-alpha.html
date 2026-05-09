@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cronbach's Alpha Literature Review</title>
+    <link rel="stylesheet" href="cronbach-alpha.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Main navigation">
+        <a class="brand" href="index.html">Learning Change Lab</a>
+        <div class="nav-links">
+          <a href="#review">Literature review</a>
+          <a href="#interpret">การแปลผล</a>
+          <a href="#calculator">Calculator</a>
+          <a href="#item-analysis">ตัด item</a>
+          <a href="#references">อ้างอิง</a>
+        </div>
+      </nav>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Questionnaire Reliability</p>
+          <h1>Cronbach's Alpha</h1>
+          <p>
+            เว็บสรุป literature review เรื่องความเชื่อมั่นของแบบสอบถาม ตั้งแต่แนวคิด alpha
+            การแปลผล การดู corrected item-total correlation ไปจนถึงการตัด item อย่างมีเหตุผล
+          </p>
+          <div class="creator-credit">
+            <span>สร้างโดย Polathep Vichitkunakorn (Tee)</span>
+            <span>9 May 2026</span>
+          </div>
+          <a class="primary-action" href="#item-analysis">ลองวิเคราะห์ item</a>
+        </div>
+
+        <div class="hero-panel" aria-label="Cronbach alpha quick view">
+          <span class="panel-label">Example Scale</span>
+          <strong id="heroAlpha">α = .84</strong>
+          <div class="alpha-meter" aria-hidden="true">
+            <div class="alpha-fill"></div>
+          </div>
+          <div class="mini-stats">
+            <span>7 items</span>
+            <span>Likert 5-point</span>
+            <span>Internal consistency</span>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section" id="review">
+        <div class="section-heading">
+          <p class="eyebrow">Literature Review</p>
+          <h2>Alpha ใช้วัดอะไร และควรระวังอะไร</h2>
+        </div>
+
+        <div class="review-grid">
+          <article class="review-card wide">
+            <h3>1. ความหมายและบทบาท</h3>
+            <p>
+              Cronbach's alpha หรือ coefficient alpha เป็นค่าสถิติที่ใช้ประเมิน
+              <strong>internal consistency reliability</strong> ของแบบสอบถามที่มีหลายข้อคำถาม
+              โดยเฉพาะแบบ Likert scale ที่ต้องการรวมหลาย item เป็นคะแนนรวมของ construct เดียวกัน
+            </p>
+          </article>
+
+          <article class="review-card">
+            <h3>2. Alpha ไม่ใช่ validity</h3>
+            <p>
+              Alpha สูงไม่ได้แปลว่าแบบสอบถามวัดถูกเรื่องเสมอไป และไม่ได้พิสูจน์ว่า scale เป็นมิติเดียว
+              ผู้วิจัยจึงควรรายงานหลักฐาน validity และ factor structure ร่วมด้วย
+            </p>
+          </article>
+
+          <article class="review-card">
+            <h3>3. Alpha สูงมากอาจไม่ดีเสมอ</h3>
+            <p>
+              ค่า alpha ที่สูงมาก เช่น .95 หรือมากกว่า อาจสะท้อนว่า item หลายข้อถามซ้ำหรือวัด construct
+              แคบเกินไป ทำให้แบบสอบถามยาวขึ้นโดยไม่ได้เพิ่มสารสนเทศใหม่มากนัก
+            </p>
+          </article>
+
+          <article class="review-card">
+            <h3>4. ต้องดูรายข้อ</h3>
+            <p>
+              การตัด item ควรพิจารณา corrected item-total correlation, alpha if item deleted,
+              การ reverse score, ความหมายเชิงทฤษฎี และผล factor analysis ถ้ามี
+            </p>
+          </article>
+
+          <article class="review-card">
+            <h3>5. ใช้ร่วมกับ omega ได้</h3>
+            <p>
+              วรรณกรรมร่วมสมัยเสนอให้ใช้ McDonald's omega ร่วมกับ alpha โดยเฉพาะเมื่อ item มี factor loading
+              ต่างกัน หรือเมื่อมีโมเดลการวัดรองรับ
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section interpretation" id="interpret">
+        <div class="section-heading">
+          <p class="eyebrow">Interpretation</p>
+          <h2>เกณฑ์การแปลผลที่ใช้บ่อย</h2>
+        </div>
+
+        <div class="interpret-layout">
+          <div class="scale-table">
+            <div class="scale-row">
+              <strong>&lt; .60</strong>
+              <span>ต่ำ / ควรปรับปรุง</span>
+              <em>ตรวจ construct, coding และคุณภาพ item</em>
+            </div>
+            <div class="scale-row">
+              <strong>.60-.69</strong>
+              <span>พอใช้ แต่ควรระวัง</span>
+              <em>อาจยอมรับได้ในงานสำรวจเบื้องต้น</em>
+            </div>
+            <div class="scale-row">
+              <strong>.70-.79</strong>
+              <span>ยอมรับได้</span>
+              <em>เหมาะกับงานวิจัยทั่วไปหลายบริบท</em>
+            </div>
+            <div class="scale-row">
+              <strong>.80-.89</strong>
+              <span>ดี</span>
+              <em>ควรรายงาน item-level statistics ประกอบ</em>
+            </div>
+            <div class="scale-row">
+              <strong>≥ .90</strong>
+              <span>สูงมาก</span>
+              <em>อาจมี item ซ้ำซ้อนหรือวัดแคบเกินไป</em>
+            </div>
+          </div>
+
+          <aside class="warning-box">
+            <h3>ใช้เกณฑ์อย่างยืดหยุ่น</h3>
+            <p>
+              ค่า .70 มักถูกใช้เป็นเกณฑ์ขั้นต่ำในงานวิจัยทั่วไป แต่ไม่ใช่กฎตายตัว
+              ต้องดูจุดประสงค์การใช้เครื่องมือ จำนวน item กลุ่มตัวอย่าง และความเสี่ยงของการตัดสินใจจากคะแนน
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section item-analysis" id="item-analysis">
+        <div class="section-heading">
+          <p class="eyebrow">Interactive Item Analysis</p>
+          <h2>ลองดูผลของการตัด item</h2>
+        </div>
+
+        <div class="analysis-workspace">
+          <section class="analysis-summary" aria-live="polite">
+            <span>Current scale</span>
+            <strong id="currentAlpha">α = .84</strong>
+            <em id="currentInterpretation">อยู่ในระดับดี</em>
+            <p id="decisionText">
+              Item 6 มี corrected item-total correlation ต่ำมาก และหากตัดออก alpha เพิ่มเป็น .89
+              จึงควรตรวจเนื้อหาและพิจารณาตัดออก
+            </p>
+          </section>
+
+          <section class="item-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ใช้</th>
+                  <th>Item</th>
+                  <th>เนื้อหาโดยย่อ</th>
+                  <th>Corrected item-total</th>
+                  <th>Alpha if deleted</th>
+                </tr>
+              </thead>
+              <tbody id="itemRows"></tbody>
+            </table>
+          </section>
+        </div>
+
+        <div class="rule-grid">
+          <article>
+            <h3>Corrected item-total ต่ำ</h3>
+            <p>ถ้าต่ำกว่า .30 ควรตรวจเนื้อหา โดยเฉพาะถ้าต่ำกว่า .20 หรือเป็นค่าติดลบ</p>
+          </article>
+          <article>
+            <h3>Alpha if deleted สูงขึ้น</h3>
+            <p>ถ้าตัดแล้ว alpha สูงขึ้นมาก item นั้นอาจรบกวน scale แต่ยังต้องดูทฤษฎีประกอบ</p>
+          </article>
+          <article>
+            <h3>Reverse score ก่อน</h3>
+            <p>ถ้ามี item เชิงลบ ต้องกลับคะแนนก่อน ไม่เช่นนั้น item-total correlation อาจติดลบผิดปกติ</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section calculator" id="calculator">
+        <div class="section-heading">
+          <p class="eyebrow">Cronbach's Alpha Calculator</p>
+          <h2>คำนวณ alpha จากข้อมูลรายคน</h2>
+          <p>
+            กรอกคะแนนแต่ละ item ของผู้ตอบแต่ละคน แล้วระบบจะคำนวณค่า alpha,
+            corrected item-total correlation และ alpha if item deleted ให้ทันที
+          </p>
+        </div>
+
+        <div class="calculator-toolbar" aria-label="Calculator controls">
+          <button type="button" id="sampleDataBtn">ใช้ข้อมูลตัวอย่าง</button>
+          <button type="button" id="addRespondentBtn">เพิ่ม respondent</button>
+          <button type="button" id="addItemBtn">เพิ่ม item</button>
+          <button type="button" id="resetCalcBtn">reset</button>
+          <label class="scale-control">
+            Scale min
+            <input id="scaleMin" type="number" value="1" step="1" />
+          </label>
+          <label class="scale-control">
+            Scale max
+            <input id="scaleMax" type="number" value="5" step="1" />
+          </label>
+        </div>
+
+        <section class="paste-panel" aria-label="Paste data calculator">
+          <div>
+            <h3>Paste ข้อมูลจาก Excel / Google Sheets</h3>
+            <p>
+              วางข้อมูลเป็นตาราง โดยแต่ละแถวคือ respondent และแต่ละคอลัมน์คือ item
+              รองรับ tab, comma และช่องว่าง สูงสุด 50 respondents × 50 items
+            </p>
+          </div>
+          <textarea
+            id="pasteData"
+            rows="6"
+            placeholder="ตัวอย่าง:
+5	5	4	5	4
+4	4	4	5	4
+3	3	3	4	3"
+          ></textarea>
+          <div class="paste-actions">
+            <button type="button" id="loadPasteBtn">นำข้อมูลที่ paste ไปคำนวณ</button>
+            <button type="button" id="clearPasteBtn">ล้างช่อง paste</button>
+          </div>
+          <p class="helper-text" id="pasteStatus">ยังไม่ได้นำเข้าข้อมูลจากช่อง paste</p>
+        </section>
+
+        <div class="calculator-grid">
+          <section class="data-entry">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <thead id="dataHead"></thead>
+                <tbody id="dataBody"></tbody>
+              </table>
+            </div>
+            <p class="helper-text">
+              ใช้คะแนนแบบ Likert เช่น 1-5 ได้โดยตรง ถ้ามี item เชิงลบ ให้ reverse score ก่อนนำมากรอก
+            </p>
+          </section>
+
+          <aside class="calc-results" aria-live="polite">
+            <span>Calculated alpha</span>
+            <strong id="calcAlpha">α = .00</strong>
+            <em id="calcInterpretation">รอข้อมูล</em>
+            <p id="calcNote">ต้องมีอย่างน้อย 2 items และ 2 respondents ที่มีข้อมูลครบเพื่อคำนวณ</p>
+          </aside>
+        </div>
+
+        <section class="calc-detail">
+          <h3>ผลวิเคราะห์รายข้อ</h3>
+          <p class="helper-text">
+            ติ๊ก/เอาติ๊กออกในคอลัมน์ “ใช้คำนวณ” เพื่อจำลองการตัดข้อคำถาม แล้วดูว่า alpha และผลรายข้อเปลี่ยนอย่างไร
+          </p>
+          <div class="item-result-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ใช้คำนวณ</th>
+                  <th>Item</th>
+                  <th>Corrected item-total</th>
+                  <th>Alpha if item deleted</th>
+                  <th>คำแนะนำ</th>
+                </tr>
+              </thead>
+              <tbody id="calcItemRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Workflow</p>
+          <h2>ขั้นตอนการตัด item อย่างมีเหตุผล</h2>
+        </div>
+        <ol class="workflow">
+          <li>ตรวจทิศทางคะแนนและ reverse score item เชิงลบก่อนคำนวณ alpha</li>
+          <li>ดู corrected item-total correlation โดยเฉพาะ item ที่ต่ำกว่า .30 หรือติดลบ</li>
+          <li>ดู alpha if item deleted ว่าการตัด item เปลี่ยนค่า alpha มากเพียงใด</li>
+          <li>ตรวจเนื้อหาของ item ว่าสอดคล้องกับนิยาม construct หรือไม่</li>
+          <li>ตรวจ factor structure หากแบบสอบถามอาจมีหลายมิติ</li>
+          <li>รายงานอย่างโปร่งใสว่า item ใดถูกตัด เหตุผลคืออะไร และ alpha เปลี่ยนอย่างไร</li>
+        </ol>
+      </section>
+
+      <section class="section references" id="references">
+        <div class="section-heading">
+          <p class="eyebrow">References</p>
+          <h2>เอกสารอ้างอิงสำคัญ</h2>
+        </div>
+        <ol>
+          <li>Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. <em>Psychometrika, 16</em>, 297-334.</li>
+          <li>Cortina, J. M. (1993). What is coefficient alpha? <em>Journal of Applied Psychology, 78</em>(1), 98-104.</li>
+          <li>Schmitt, N. (1996). Uses and abuses of coefficient alpha. <em>Psychological Assessment, 8</em>(4), 350-353.</li>
+          <li>Tavakol, M., & Dennick, R. (2011). Making sense of Cronbach's alpha. <em>International Journal of Medical Education, 2</em>, 53-55.</li>
+          <li>Sijtsma, K. (2009). On the use, misuse, and limited usefulness of Cronbach's alpha. <em>Psychometrika, 74</em>(1), 107-120.</li>
+          <li>Dunn, T. J., Baguley, T., & Brunsden, V. (2014). From alpha to omega. <em>British Journal of Psychology, 105</em>(3), 399-412.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>Created by Polathep Vichitkunakorn (Tee) · 9 May 2026 · Cronbach's Alpha literature review.</p>
+    </footer>
+
+    <script src="cronbach-alpha.js"></script>
+  </body>
+</html>
