@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pre-test/Post-test Statistics Lab</title>
+    <link rel="stylesheet" href="prepost-statistics.css" />
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.5.3/papaparse.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+    <script src="prepost-statistics.js" defer></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <nav class="topbar" aria-label="Main navigation">
+        <a class="brand" href="prepost-statistics.html">Pre/Post Statistics Lab</a>
+        <div class="nav-links">
+          <a href="#data">ข้อมูล</a>
+          <a href="#results">ผลวิเคราะห์</a>
+          <a href="#plots">กราฟ</a>
+          <a href="#interpretation">แปลผล</a>
+          <a href="index.html">Normalized gain</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Paired Learning Assessment</p>
+          <h1>วิเคราะห์คะแนนก่อน-หลังเรียน</h1>
+          <p>
+            อัปโหลดหรือวางข้อมูล pre-test/post-test แล้วเว็บจะตรวจ assumption เลือกแนวทางทดสอบที่เหมาะสม
+            ทดสอบสมมติฐานทั้งแบบแตกต่างกันและหลังเรียนสูงกว่าก่อนเรียน พร้อมกราฟเปรียบเทียบรายบุคคล
+          </p>
+          <div class="creator-credit">Website โดย Polathep Vichitkunakorn (Tee)</div>
+          <a class="primary-action" href="#data">เริ่มวิเคราะห์</a>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 560 420" role="img">
+            <defs>
+              <linearGradient id="heroPanel" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#142421" />
+                <stop offset="100%" stop-color="#203c42" />
+              </linearGradient>
+              <linearGradient id="heroAccent" x1="0" x2="1">
+                <stop offset="0%" stop-color="#f0c65a" />
+                <stop offset="100%" stop-color="#44b27a" />
+              </linearGradient>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#06110f" flood-opacity="0.35" />
+              </filter>
+            </defs>
+            <rect x="34" y="30" width="492" height="350" rx="22" fill="url(#heroPanel)" filter="url(#softShadow)" />
+            <rect x="58" y="58" width="188" height="74" rx="14" fill="#ffffff" opacity="0.08" />
+            <rect x="272" y="58" width="196" height="74" rx="14" fill="#ffffff" opacity="0.08" />
+            <text x="78" y="86" fill="#d9e7df" font-size="16" font-weight="700">Mean difference</text>
+            <text x="78" y="116" fill="#ffffff" font-size="30" font-weight="850">+2.17</text>
+            <text x="292" y="86" fill="#d9e7df" font-size="16" font-weight="700">Recommended test</text>
+            <text x="292" y="116" fill="#ffffff" font-size="24" font-weight="850">Wilcoxon</text>
+            <rect x="58" y="156" width="410" height="170" rx="18" fill="#f7fbf8" opacity="0.96" />
+            <g stroke="#d7e2dc" stroke-width="1">
+              <line x1="98" y1="286" x2="432" y2="286" />
+              <line x1="98" y1="246" x2="432" y2="246" />
+              <line x1="98" y1="206" x2="432" y2="206" />
+            </g>
+            <g fill="none" stroke-linecap="round">
+              <path d="M145 284 C210 260 250 230 365 194" stroke="#2e7d32" stroke-width="5" opacity="0.85" />
+              <path d="M145 262 C218 250 276 220 365 206" stroke="#2e7d32" stroke-width="4" opacity="0.62" />
+              <path d="M145 232 C230 244 292 238 365 238" stroke="#f4b63d" stroke-width="4" opacity="0.9" />
+              <path d="M145 202 C235 214 290 228 365 252" stroke="#c8403a" stroke-width="4" opacity="0.75" />
+              <path d="M145 294 C224 266 278 204 365 178" stroke="#2e7d32" stroke-width="4" opacity="0.78" />
+            </g>
+            <g fill="#17211e" font-size="15" font-weight="800">
+              <text x="126" y="314">Pre</text>
+              <text x="342" y="314">Post</text>
+            </g>
+            <circle cx="365" cy="194" r="8" fill="#2e7d32" />
+            <circle cx="365" cy="238" r="8" fill="#f4b63d" />
+            <circle cx="365" cy="252" r="8" fill="#c8403a" />
+            <rect x="58" y="344" width="410" height="8" rx="4" fill="#ffffff" opacity="0.14" />
+            <rect x="58" y="344" width="274" height="8" rx="4" fill="url(#heroAccent)" />
+          </svg>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="workspace" id="data">
+        <div class="panel data-panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Step 1</p>
+            <h2>นำเข้าข้อมูล</h2>
+          </div>
+
+          <div class="input-grid">
+            <div class="file-drop" id="fileDrop">
+              <span class="file-icon">CSV/XLSX</span>
+              <strong>เลือกไฟล์ข้อมูล</strong>
+              <small>ลากไฟล์มาวางที่นี่ หรือกดปุ่มด้านล่าง</small>
+              <input id="fileInput" type="file" accept=".csv,.xlsx,.xls" />
+              <label class="file-button" for="fileInput">เปิดไฟล์จากเครื่อง</label>
+              <small id="fileStatus">รองรับ .csv, .xlsx, .xls หรือวางข้อมูลจาก Excel/Google Sheets ด้านล่าง</small>
+            </div>
+
+            <div class="paste-area">
+              <label for="csvInput">วางข้อมูลจาก CSV / Excel / Google Sheets</label>
+              <textarea id="csvInput" spellcheck="false"></textarea>
+              <small class="paste-hint">วางได้ทั้งแบบมีหัวคอลัมน์ เช่น id, pre, post หรือวาง 2-3 คอลัมน์จาก Excel/Sheets โดยตรง</small>
+              <div class="button-row">
+                <button id="loadPasteButton" type="button">อ่านข้อมูลที่วาง</button>
+                <button id="sampleButton" type="button" class="secondary">ใช้ข้อมูลตัวอย่าง</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="manual-entry">
+            <div class="manual-head">
+              <div>
+                <p class="eyebrow">Manual entry</p>
+                <h3>กรอกคะแนนเป็นช่อง ๆ</h3>
+              </div>
+              <div class="row-tools">
+                <label>
+                  จำนวน ID
+                  <input id="rowCountInput" type="number" value="20" min="1" max="500" step="1" />
+                </label>
+                <button id="makeRowsButton" type="button" class="secondary">สร้างตาราง</button>
+                <button id="useGridButton" type="button" class="primary">ใช้ข้อมูลจากตาราง</button>
+              </div>
+            </div>
+            <div class="quick-row-buttons" aria-label="Quick row counts">
+              <button type="button" class="ghost row-preset" data-rows="10">10 ID</button>
+              <button type="button" class="ghost row-preset" data-rows="50">50 ID</button>
+              <button type="button" class="ghost row-preset" data-rows="100">100 ID</button>
+              <button type="button" class="ghost row-preset" data-rows="500">500 ID</button>
+            </div>
+            <div class="editable-wrap">
+              <table class="editable-table" id="editableTable" aria-label="Editable pre-post score table"></table>
+            </div>
+          </div>
+
+          <div class="column-tools">
+            <label>
+              ID
+              <select id="idColumn"></select>
+            </label>
+            <label>
+              Pre-test
+              <select id="preColumn"></select>
+            </label>
+            <label>
+              Post-test
+              <select id="postColumn"></select>
+            </label>
+            <label>
+              ระดับนัยสำคัญ
+              <select id="alphaSelect">
+                <option value="0.05">0.05</option>
+                <option value="0.01">0.01</option>
+                <option value="0.10">0.10</option>
+              </select>
+            </label>
+            <label>
+              คะแนนเต็ม
+              <input id="maxScoreInput" type="number" value="100" min="1" step="1" />
+            </label>
+            <button id="analyzeButton" type="button" class="primary">วิเคราะห์</button>
+          </div>
+
+          <div class="preview-wrap">
+            <table id="previewTable" aria-label="Data preview"></table>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-shell" id="results">
+        <div class="summary-strip" id="summaryCards"></div>
+
+        <article class="panel descriptive-panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Descriptive statistics</p>
+            <h2>สรุปคะแนน pre-test และ post-test</h2>
+          </div>
+          <div id="descriptiveOutput" class="output-stack empty-state">
+            โหลดข้อมูลแล้วกดวิเคราะห์เพื่อดู Median (Q1, Q3), Mean (SD), Max และ Min
+          </div>
+        </article>
+
+        <div class="results-grid">
+          <article class="panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Step 2</p>
+              <h2>Assumption checks</h2>
+            </div>
+            <div id="assumptionOutput" class="output-stack empty-state">
+              โหลดข้อมูลแล้วกดวิเคราะห์เพื่อดูผลตรวจ assumption
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Step 3</p>
+              <h2>Hypothesis tests</h2>
+            </div>
+            <div id="testOutput" class="output-stack empty-state">
+              ระบบจะแสดง paired t-test และ Wilcoxon signed-rank test ทั้ง two-sided และ one-sided
+            </div>
+          </article>
+        </div>
+
+        <article class="panel normalized-panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Normalized change</p>
+            <h2>สัดส่วนระดับการเปลี่ยนแปลง</h2>
+          </div>
+          <div id="normalizedOutput" class="normalized-layout empty-state">
+            ระบบจะแสดงจำนวนและร้อยละของ normalized change ในแต่ละ category
+          </div>
+        </article>
+      </section>
+
+      <section class="plots" id="plots">
+        <div class="panel">
+          <div class="plot-header">
+            <div>
+              <p class="eyebrow">Step 4</p>
+              <h2>กราฟเปรียบเทียบ</h2>
+            </div>
+            <div class="legend">
+              <span><i class="up"></i>เพิ่มขึ้น</span>
+              <span><i class="same"></i>เท่าเดิม</span>
+              <span><i class="down"></i>ลดลง</span>
+            </div>
+          </div>
+          <div class="chart-grid">
+            <div class="chart-box chart-wide">
+              <h3>Box plot + Individual change plot</h3>
+              <svg id="combinedPlot" viewBox="0 0 860 500" role="img" aria-label="Combined box and individual change plot"></svg>
+            </div>
+            <div class="chart-box">
+              <h3>Normalized change categories</h3>
+              <svg id="normalizedPlot" viewBox="0 0 720 460" role="img" aria-label="Normalized change category visualization"></svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interpretation" id="interpretation">
+        <div class="panel interpretation-panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Step 5</p>
+            <h2>แปลผลการวิเคราะห์</h2>
+          </div>
+          <div id="interpretationOutput" class="interpretation-output empty-state">
+            โหลดข้อมูลแล้วกดวิเคราะห์เพื่อให้ระบบสรุปและแปลผลครบถ้วน
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Website โดย Polathep Vichitkunakorn (Tee)</span>
+      <span>Version 2026-05-13 · Pre/Post Statistics Lab</span>
+    </footer>
+  </body>
+</html>
